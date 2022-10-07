@@ -1,2 +1,2 @@
-# challenge-4-workday-scheduler
-The fourth challenge. An app to help schedule workday tasks and projects.
+# challenge-4-code-quiz
+The fourth challenge. An app to help me study my course material.
