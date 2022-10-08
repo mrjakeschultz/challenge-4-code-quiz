@@ -15,16 +15,17 @@
 	</head>
 
 	<body class="row justify-content-center">
-		<div class="highScoresButton">
+		<div id="highScoresButton">
 			<input type="button" value="View High Scores" />
+			<div class="timer">Time: <span id="time">0</span></div>
 		</div>
 
 		<section
 			class="everything-container row justify-content-center m-5 col-lg-8 col-sm-4"
 		>
-			<div class="welcome-card d-none">
-				<h1 class="challenge-header">Welcome to the Coding Quiz</h1>
-				<div class="instructions">
+			<div id="welcome-card" class="d-none">
+				<h1 id="challenge-header">Welcome to the Coding Quiz</h1>
+				<div id="instructions">
 					<p class="fs-5">
 						This is a blurb about the quiz and instructions and stuff. This is a
 						blurb about the quiz and instructions and stuff. This is a blurb
@@ -32,13 +33,13 @@
 						quiz and instructions and stuff.
 					</p>
 				</div>
-				<div class="startBtn text-center">
+				<div id="startBtn" class="text-center">
 					<button class="btn btn-primary btn-sm">Start Quiz</button>
 				</div>
 			</div>
 
-			<div class="quiz-card">
-				<h1 class="question">Placeholder Question Prompt</h1>
+			<div id="quiz-card" class="d-none">
+				<h1 id="question">Placeholder Question Prompt</h1>
 				<div
 					style="
 						display: inline-flex;
@@ -63,9 +64,24 @@
 				</div>
 			</div>
 
-			<div class="wrapup-card"></div>
+			<div id="wrapup-card" class="mx-1 d-none">
+				<h2 class="fs-2">All done!</h2>
+				<p class="fs-4">
+					Your final score is <span id="calc-final-score"></span>.
+				</p>
+				<p>
+					Enter initials:
+					<input type="text" id="initials" />
+					<button id="btnSubmit" class="btn btn-primary btn-sm">Submit</button>
+				</p>
+			</div>
 
-			<div class="high-scores-card"></div>
+			<div id="high-scores-card">
+				<h1>High Scores</h1>
+				<ol id="high-scores-list" class="list-group"></ol>
+				<button id="gobackBtn">Go Back</button>
+				<button id="clearBtn">Clear High Scores</button>
+			</div>
 		</section>
 
 		<script src="./assets/core.js"></script>
