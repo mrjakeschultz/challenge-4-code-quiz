@@ -13,9 +13,11 @@
 //define variable that looks to an array of questions
 //display the retrieved question text
 //display possible answers
-////will need an event listener for each answer button
 
 //TO DO event listener for starting quiz
+
+(1).textContent(button1);
+setAttribute(correctAnswerID);
 
 //TO DO event listener for clicking answer buttons
 //statement to check if correct answer for given question
