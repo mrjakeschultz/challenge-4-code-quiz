@@ -39,7 +39,7 @@ function startQuiz() {
 	countdownIntervalId = setInterval(secondCountdown, 1000);
 	questions.forEach(getQuestion);
 
-	injectResponses();
+	questions.forEach(injectResponses);
 	console.log(timeRemaining);
 }
 
@@ -48,28 +48,12 @@ var questionsIndex = 0;
 var responsesIndex;
 var buttonsArray = document.querySelectorAll("#quizCard button");
 
-// function getQuestion() {
-// 	selectedQuestion = questions[questionsIndex];
-// 	questionTitle.textContent = selectedQuestion.title;
-// 	selectedQuestion.responses.forEach(function )
-// }
-
-// getQuestion Option B
-// function getQuestion() {
-// 	selectedQuestion = questions[questionsIndex];
-// 	questionTitle.textContent = selectedQuestion.title;
-// 	selectedQuestion;
-// 	console.log("fired getQuestion");
-// }
-
-// getQuestion Option A
 function getQuestion() {
-	for (var i = 0; i < questions.length; i++) {
-		questionsIndex = i;
-		selectedQuestion = questions[questionsIndex];
-		questionTitle.textContent = selectedQuestion.title;
-		console.log("fired getQuestion");
-	}
+	// for (var i = 0; i < questions.length; i++) {
+	// 	questionsIndex = i;
+	selectedQuestion = questions[questionsIndex];
+	questionTitle.textContent = selectedQuestion.title;
+	console.log("fired getQuestion");
 }
 
 function injectResponses() {
@@ -92,7 +76,7 @@ $(buttonsArray).on("click", function (e) {
 		console.log("true");
 	}
 
-	// questionsIndex++;
+	questionsIndex++;
 
 	if (questionsIndex === questions.length) {
 		endQuiz();
