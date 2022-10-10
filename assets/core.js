@@ -55,11 +55,13 @@ function startQuiz() {
 //---go through response array within the question object and insert their values into Choice1-4
 
 var selectedQuestion;
+var questionsIndex;
 var buttonsArray = document.querySelectorAll("#quizCard button");
 
 function getQuestion() {
 	for (var i = 0; i < questions.length; i++) {
 		selectedQuestion = questions[i];
+		questionsIndex = i;
 	}
 }
 
@@ -70,20 +72,36 @@ function injectResponses() {
 	}
 }
 
-buttonsArray.onclick = choicesClick;
+for (var i = 0; i < buttonsArray.length; i++) {
+	buttonsArray[i].addEventListener("click", choicesClick);
+}
 
 function choicesClick() {
-	if (buttonsArray.dataset.iscorrect !== true) {
-		timeRemaining -= 10;
-		if (timeRemaining < 0) {
-			timeRemaining = 0;
+	for (var i = 0; i < questions.length; i++) {
+		if (buttonsArray[i].dataset.iscorrect !== true) {
+			console.log("false");
+		} else {
+			console.log("true");
 		}
-		timeCounter.textContent = timeRemaining;
-	} else {
-		timeRemaining += 10;
-		timeCounter.textContent = timeRemaining;
 	}
 }
+
+// Option A
+// function choicesClick() {
+// 	for (var i = 0; i < questions.length; i++) {
+// 		if (buttonsArray[questionsIndex].dataset.iscorrect !== true) {
+// 			timeRemaining = timeRemaining - 10;
+// 		}
+// 		if (timeRemaining < 0) {
+// 			timeRemaining = 0;
+// 		} else {
+// 			timeRemaining = timeRemaining + 10;
+// 		}
+
+// 		timeCounter.textContent = timeRemaining;
+// 		console.log(buttonsArray[i].dataset.iscorrect);
+// 	}
+// }
 // 	selectedQuestion++;
 // 	if (selectedQuestion === questions.length) {
 // 		endQuiz();
