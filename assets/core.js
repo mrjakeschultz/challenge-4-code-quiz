@@ -45,7 +45,6 @@ function startQuiz() {
 	getQuestion();
 	questionTitle.textContent = selectedQuestion.title;
 	injectResponses();
-
 	console.log(timeRemaining);
 }
 
@@ -71,28 +70,31 @@ function injectResponses() {
 	}
 }
 
-buttonsArray.addEventLister("click", choicesClick());
+buttonsArray.onclick = choicesClick;
 
 function choicesClick() {
-	if (this.dataset.iscorrect !== true) {
-		timeRemaing -= 10;
-
+	if (buttonsArray.dataset.iscorrect !== true) {
+		timeRemaining -= 10;
 		if (timeRemaining < 0) {
 			timeRemaining = 0;
 		}
-
 		timeCounter.textContent = timeRemaining;
 	} else {
-		timeRemaining = +10;
-	}
-	selectedQuestion++;
-	if (selectedQuestion === questions.length) {
-		//endQuiz();
-	} else {
-		getQuestion();
+		timeRemaining += 10;
+		timeCounter.textContent = timeRemaining;
 	}
 }
+// 	selectedQuestion++;
+// 	if (selectedQuestion === questions.length) {
+// 		endQuiz();
+// 	} else {
+// 		getQuestion();
+// 	}
+// }
 
+function endQuiz() {
+	console.log("endQuiz check");
+}
 //****TO DO event listener for clicking answer buttons
 //statement to check if correct answer for given question
 //if false then subtract time from counter
