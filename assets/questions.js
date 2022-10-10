@@ -8,19 +8,19 @@ var questions = [
 		responses: [
 			{
 				title: "1",
-				isCorrect: true,
+				iscorrect: true,
 			},
 			{
 				title: "2",
-				isCorrect: false,
+				iscorrect: false,
 			},
 			{
 				title: "3",
-				isCorrect: false,
+				iscorrect: false,
 			},
 			{
 				title: "4",
-				isCorrect: false,
+				iscorrect: false,
 			},
 		],
 	},
@@ -30,19 +30,19 @@ var questions = [
 		responses: [
 			{
 				title: "1",
-				isCorrect: false,
+				iscorrect: false,
 			},
 			{
 				title: "2",
-				isCorrect: true,
+				iscorrect: true,
 			},
 			{
 				title: "3",
-				isCorrect: false,
+				iscorrect: false,
 			},
 			{
 				title: "4",
-				isCorrect: false,
+				iscorrect: false,
 			},
 		],
 	},
@@ -52,19 +52,19 @@ var questions = [
 		responses: [
 			{
 				title: "1",
-				isCorrect: false,
+				iscorrect: false,
 			},
 			{
 				title: "2",
-				isCorrect: false,
+				iscorrect: false,
 			},
 			{
 				title: "3",
-				isCorrect: true,
+				iscorrect: true,
 			},
 			{
 				title: "4",
-				isCorrect: false,
+				iscorrect: false,
 			},
 		],
 	},
@@ -74,19 +74,19 @@ var questions = [
 		responses: [
 			{
 				title: "1",
-				isCorrect: false,
+				iscorrect: false,
 			},
 			{
 				title: "2",
-				isCorrect: false,
+				iscorrect: false,
 			},
 			{
 				title: "3",
-				isCorrect: false,
+				iscorrect: false,
 			},
 			{
 				title: "4",
-				isCorrect: true,
+				iscorrect: true,
 			},
 		],
 	},

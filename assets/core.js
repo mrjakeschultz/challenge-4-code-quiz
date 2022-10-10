@@ -26,23 +26,22 @@ var clearBtn = document.getElementById("clearBtn");
 
 startBtn.addEventListener("click", startQuiz);
 
-var countdownInterval;
+var countdownIntervalId;
 var timeRemaining = 30;
 
 function secondCountdown() {
 	if (timeRemaining > 0) {
 		timeRemaining--;
 	} else {
-		clearInterval(countdownInterval);
+		clearInterval(countdownIntervalId);
 	}
 	timeCounter.textContent = timeRemaining;
-	console.log(timeRemaining);
 }
 
 function startQuiz() {
 	welcomeCard.classList.add("d-none");
 	quizCard.classList.remove("d-none");
-	countdownInterval = setInterval(secondCountdown, 1000);
+	countdownIntervalId = setInterval(secondCountdown, 1000);
 	getQuestion();
 	questionTitle.textContent = selectedQuestion.title;
 	injectResponses();
@@ -52,9 +51,9 @@ function startQuiz() {
 
 //****TO DO make a function to retrieve a question from a bank of questions...getQuestion
 //---define variable that looks to an array of questions 'var questions'
-// for loop to go through the array and pick a question object
-// once item in questions array is select then put the title value in questionTitle
-// go through response array within the question object and insert their values into Choice1-4
+//---for loop to go through the array and pick a question object
+//---once item in questions array is select then put the title value in questionTitle
+//---go through response array within the question object and insert their values into Choice1-4
 
 var selectedQuestion;
 var buttonsArray = document.querySelectorAll("#quizCard button");
@@ -68,12 +67,33 @@ function getQuestion() {
 function injectResponses() {
 	for (var i = 0; i < selectedQuestion.responses.length; i++) {
 		buttonsArray[i].textContent = selectedQuestion.responses[i].title;
+		buttonsArray[i].dataset.iscorrect = selectedQuestion.responses[i].iscorrect;
 	}
 }
 
-//TO DO event listener for starting quiz
+buttonsArray.addEventLister("click", choicesClick());
 
-//TO DO event listener for clicking answer buttons
+function choicesClick() {
+	if (this.dataset.iscorrect !== true) {
+		timeRemaing -= 10;
+
+		if (timeRemaining < 0) {
+			timeRemaining = 0;
+		}
+
+		timeCounter.textContent = timeRemaining;
+	} else {
+		timeRemaining = +10;
+	}
+	selectedQuestion++;
+	if (selectedQuestion === questions.length) {
+		//endQuiz();
+	} else {
+		getQuestion();
+	}
+}
+
+//****TO DO event listener for clicking answer buttons
 //statement to check if correct answer for given question
 //if false then subtract time from counter
 //if true then add time to counter
