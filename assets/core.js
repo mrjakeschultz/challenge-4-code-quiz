@@ -1,23 +1,77 @@
 //TO DO make variables to target elements
+var highScoresBtn = document.querySelector("#highScoresButton input");
+var timeCounter = document.getElementById("timeCounter");
+var welcomeCard = document.getElementById("welcomeCard");
+var startBtn = document.getElementById("startBtn");
+var quizCard = document.getElementById("quizCard");
+var questionTitle = document.getElementById("questionTitle");
+var choice1 = document.getElementById("choice1");
+var choice2 = document.getElementById("choice2");
+var choice3 = document.getElementById("choice3");
+var choice4 = document.getElementById("choice4");
+var wrapupCard = document.getElementById("wrapupCard");
+var calcFinalScore = document.getElementById("calcFinalScore");
+var initials = document.getElementById("initials");
+var btnSubmit = document.getElementById("btnSubmit");
+var highScoresCard = document.getElementById("highScoresCard");
+var highScoresList = document.getElementById("highScoresList");
+var clearBtn = document.getElementById("clearBtn");
 
-//TO DO make variable(s) to track quiz progress
+//******TO DO make a function to start the quiz
+//----should show a quizCard
+//----should expose the div that will hold/display the question..quizCard
+//----should start the clock/timer...interval/clock function
+//----should show the counter on the clock/timer
+// should pull question from the bank...subfunction...getQuestion function
 
-//TO DO make a function to start the quiz
-// should show a starting screen
-// should expose the div that will hold/display the question
-// should start the clock/timer
-// should show the counter on the clock/timer
-// should pull question from the bank...subfunction
+startBtn.addEventListener("click", startQuiz);
 
-//TO DO make a function to retrieve a question from a bank of questions
-//define variable that looks to an array of questions
-//display the retrieved question text
-//display possible answers
+var countdownInterval;
+var timeRemaining = 30;
+
+function secondCountdown() {
+	if (timeRemaining > 0) {
+		timeRemaining--;
+	} else {
+		clearInterval(countdownInterval);
+	}
+	timeCounter.textContent = timeRemaining;
+	console.log(timeRemaining);
+}
+
+function startQuiz() {
+	welcomeCard.classList.add("d-none");
+	quizCard.classList.remove("d-none");
+	countdownInterval = setInterval(secondCountdown, 1000);
+	getQuestion();
+	questionTitle.textContent = selectedQuestion.title;
+	injectResponses();
+
+	console.log(timeRemaining);
+}
+
+//****TO DO make a function to retrieve a question from a bank of questions...getQuestion
+//---define variable that looks to an array of questions 'var questions'
+// for loop to go through the array and pick a question object
+// once item in questions array is select then put the title value in questionTitle
+// go through response array within the question object and insert their values into Choice1-4
+
+var selectedQuestion;
+var buttonsArray = document.querySelectorAll("#quizCard button");
+
+function getQuestion() {
+	for (var i = 0; i < questions.length; i++) {
+		selectedQuestion = questions[i];
+	}
+}
+
+function injectResponses() {
+	for (var i = 0; i < selectedQuestion.responses.length; i++) {
+		buttonsArray[i].textContent = selectedQuestion.responses[i].title;
+	}
+}
 
 //TO DO event listener for starting quiz
-
-(1).textContent(button1);
-setAttribute(correctAnswerID);
 
 //TO DO event listener for clicking answer buttons
 //statement to check if correct answer for given question
