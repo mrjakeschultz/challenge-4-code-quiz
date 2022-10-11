@@ -24,8 +24,9 @@ highScoresBtn.addEventListener("click", function () {
 });
 startBtn.addEventListener("click", startQuiz);
 goBackBtn.addEventListener("click", function () {
-	highScoresCard.classList.add("d-none");
-	welcomeCard.classList.remove("d-none");
+	window.location.reload();
+	// highScoresCard.classList.add("d-none");
+	// welcomeCard.classList.remove("d-none");
 });
 
 var scoreCounter = 0;
