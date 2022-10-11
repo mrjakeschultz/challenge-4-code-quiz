@@ -16,8 +16,17 @@ var submitBtn = document.getElementById("submitBtn");
 var highScoresCard = document.getElementById("highScoresCard");
 var highScoresList = document.getElementById("highScoresList");
 var clearBtn = document.getElementById("clearBtn");
+var goBackBtn = document.getElementById("gobackBtn");
 
+highScoresBtn.addEventListener("click", function () {
+	welcomeCard.classList.add("d-none");
+	highScoresCard.classList.remove("d-none");
+});
 startBtn.addEventListener("click", startQuiz);
+goBackBtn.addEventListener("click", function () {
+	highScoresCard.classList.add("d-none");
+	welcomeCard.classList.remove("d-none");
+});
 
 var scoreCounter = 0;
 var countdownIntervalId;
@@ -94,24 +103,44 @@ function endQuiz() {
 	console.log("endQuiz check");
 }
 
-submitBtn.addEventListener("click", saveInitials);
+displayHighScores();
+submitBtn.addEventListener("click", saveScore);
+clearBtn.addEventListener("click", clearHighScores);
 
-function saveInitials() {
+function saveScore() {
 	if (initials !== "") {
-		highScoresList =
-			JSON.parse(window.localStorage.getItem("highScoresList")) || [];
+		var highscores =
+			JSON.parse(window.localStorage.getItem("highscores")) || [];
 
 		var newHighScore = {
+			score: scoreCounter,
 			initials: initials,
 		};
 
-		highScoresList.push(newHighSchore);
-		window.localStorage.setItem(
-			"highScoresList",
-			JSON.stringify(highScoresList)
-		);
+		highscores.push(newHighScore);
+		window.localStorage.setItem("highscores", JSON.stringify(highscores));
 
 		wrapupCard.classList.add("d-none");
 		highScoresCard.classList.remove("d-none");
 	}
+}
+
+function displayHighScores() {
+	var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+
+	highscores.sort(function (a, b) {
+		return b.score - a.score;
+	});
+
+	highscores.forEach(function (score) {
+		var scoreLi = document.createElement("li");
+		scoreLi.textContent = score.initials + " - " + score.score;
+
+		highScoresList.appendChild(scoreLi);
+	});
+}
+
+function clearHighScores() {
+	window.localStorage.removeItem("highscores");
+	window.location.reload();
 }
