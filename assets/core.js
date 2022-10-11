@@ -12,14 +12,14 @@ var choice4 = document.getElementById("choice4");
 var wrapupCard = document.getElementById("wrapupCard");
 var calcFinalScore = document.getElementById("calcFinalScore");
 var initials = document.getElementById("initials");
-var btnSubmit = document.getElementById("btnSubmit");
+var submitBtn = document.getElementById("submitBtn");
 var highScoresCard = document.getElementById("highScoresCard");
 var highScoresList = document.getElementById("highScoresList");
 var clearBtn = document.getElementById("clearBtn");
 
 startBtn.addEventListener("click", startQuiz);
 
-var scoreCounter;
+var scoreCounter = 0;
 var countdownIntervalId;
 var timeRemaining = 30;
 
@@ -49,8 +49,6 @@ var responsesIndex;
 var buttonsArray = document.querySelectorAll("#quizCard button");
 
 function getQuestion() {
-	// for (var i = 0; i < questions.length; i++) {
-	// 	questionsIndex = i;
 	selectedQuestion = questions[questionsIndex];
 	questionTitle.textContent = selectedQuestion.title;
 	console.log("fired getQuestion");
@@ -73,6 +71,7 @@ $(buttonsArray).on("click", function (e) {
 		}
 	} else {
 		timeRemaining += 15;
+		scoreCounter++;
 		console.log("true");
 	}
 
@@ -91,5 +90,28 @@ function endQuiz() {
 	clearInterval(countdownIntervalId);
 	quizCard.classList.add("d-none");
 	wrapupCard.classList.remove("d-none");
+	calcFinalScore.textContent = scoreCounter;
 	console.log("endQuiz check");
+}
+
+submitBtn.addEventListener("click", saveInitials);
+
+function saveInitials() {
+	if (initials !== "") {
+		highScoresList =
+			JSON.parse(window.localStorage.getItem("highScoresList")) || [];
+
+		var newHighScore = {
+			initials: initials,
+		};
+
+		highScoresList.push(newHighSchore);
+		window.localStorage.setItem(
+			"highScoresList",
+			JSON.stringify(highScoresList)
+		);
+
+		wrapupCard.classList.add("d-none");
+		highScoresCard.classList.remove("d-none");
+	}
 }
