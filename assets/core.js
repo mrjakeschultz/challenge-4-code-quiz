@@ -2,7 +2,7 @@
 var highScoresBtn = document.querySelector("#highScoresButton input");
 var timeCounter = document.getElementById("timeCounter");
 var welcomeCard = document.getElementById("welcomeCard");
-var startBtn = document.getElementById("startBtn");
+var startBtn = document.querySelector("#startBtn");
 var quizCard = document.getElementById("quizCard");
 var questionTitle = document.getElementById("questionTitle");
 var choice1 = document.getElementById("choice1");
@@ -12,20 +12,14 @@ var choice4 = document.getElementById("choice4");
 var wrapupCard = document.getElementById("wrapupCard");
 var calcFinalScore = document.getElementById("calcFinalScore");
 var initials = document.getElementById("initials");
-var btnSubmit = document.getElementById("btnSubmit");
+var submitBtn = document.getElementById("submitBtn");
 var highScoresCard = document.getElementById("highScoresCard");
 var highScoresList = document.getElementById("highScoresList");
 var clearBtn = document.getElementById("clearBtn");
 
-//******TO DO make a function to start the quiz
-//----should show a quizCard
-//----should expose the div that will hold/display the question..quizCard
-//----should start the clock/timer...interval/clock function
-//----should show the counter on the clock/timer
-// should pull question from the bank...subfunction...getQuestion function
-
 startBtn.addEventListener("click", startQuiz);
 
+var scoreCounter = 0;
 var countdownIntervalId;
 var timeRemaining = 30;
 
@@ -34,6 +28,7 @@ function secondCountdown() {
 		timeRemaining--;
 	} else {
 		clearInterval(countdownIntervalId);
+		endQuiz();
 	}
 	timeCounter.textContent = timeRemaining;
 }
@@ -42,101 +37,81 @@ function startQuiz() {
 	welcomeCard.classList.add("d-none");
 	quizCard.classList.remove("d-none");
 	countdownIntervalId = setInterval(secondCountdown, 1000);
-	getQuestion();
-	questionTitle.textContent = selectedQuestion.title;
-	injectResponses();
+	questions.forEach(getQuestion);
+
+	questions.forEach(injectResponses);
 	console.log(timeRemaining);
 }
 
-//****TO DO make a function to retrieve a question from a bank of questions...getQuestion
-//---define variable that looks to an array of questions 'var questions'
-//---for loop to go through the array and pick a question object
-//---once item in questions array is select then put the title value in questionTitle
-//---go through response array within the question object and insert their values into Choice1-4
-
 var selectedQuestion;
-var questionsIndex;
+var questionsIndex = 0;
+var responsesIndex;
 var buttonsArray = document.querySelectorAll("#quizCard button");
 
 function getQuestion() {
-	for (var i = 0; i < questions.length; i++) {
-		selectedQuestion = questions[i];
-		questionsIndex = i;
-	}
+	selectedQuestion = questions[questionsIndex];
+	questionTitle.textContent = selectedQuestion.title;
+	console.log("fired getQuestion");
 }
 
 function injectResponses() {
 	for (var i = 0; i < selectedQuestion.responses.length; i++) {
 		buttonsArray[i].textContent = selectedQuestion.responses[i].title;
 		buttonsArray[i].dataset.iscorrect = selectedQuestion.responses[i].iscorrect;
+		console.log("fired injectResponses");
 	}
 }
 
-for (var i = 0; i < buttonsArray.length; i++) {
-	buttonsArray[i].addEventListener("click", choicesClick);
-}
-
-function choicesClick() {
-	for (var i = 0; i < questions.length; i++) {
-		if (buttonsArray[i].dataset.iscorrect !== true) {
-			console.log("false");
-		} else {
-			console.log("true");
+$(buttonsArray).on("click", function (e) {
+	if ($(this).attr("data-iscorrect") !== "true") {
+		timeRemaining -= 10;
+		console.log("false");
+		if (timeRemaining < 0) {
+			timeRemaining = 0;
 		}
+	} else {
+		timeRemaining += 15;
+		scoreCounter++;
+		console.log("true");
 	}
-}
 
-// Option A
-// function choicesClick() {
-// 	for (var i = 0; i < questions.length; i++) {
-// 		if (buttonsArray[questionsIndex].dataset.iscorrect !== true) {
-// 			timeRemaining = timeRemaining - 10;
-// 		}
-// 		if (timeRemaining < 0) {
-// 			timeRemaining = 0;
-// 		} else {
-// 			timeRemaining = timeRemaining + 10;
-// 		}
+	questionsIndex++;
 
-// 		timeCounter.textContent = timeRemaining;
-// 		console.log(buttonsArray[i].dataset.iscorrect);
-// 	}
-// }
-// 	selectedQuestion++;
-// 	if (selectedQuestion === questions.length) {
-// 		endQuiz();
-// 	} else {
-// 		getQuestion();
-// 	}
-// }
+	if (questionsIndex === questions.length) {
+		endQuiz();
+	} else {
+		getQuestion();
+		questionTitle.textContent = selectedQuestion.title;
+		injectResponses();
+	}
+});
 
 function endQuiz() {
+	clearInterval(countdownIntervalId);
+	quizCard.classList.add("d-none");
+	wrapupCard.classList.remove("d-none");
+	calcFinalScore.textContent = scoreCounter;
 	console.log("endQuiz check");
 }
-//****TO DO event listener for clicking answer buttons
-//statement to check if correct answer for given question
-//if false then subtract time from counter
-//if true then add time to counter
-//need condition if timer !== 0 then...
-//...then call function to pull question from bank
-////need for loop somewhere to go through array to make sure don't pull same question twice during quiz, and to go through array
-//if for loop hits 0 then end quiz...call function
-//if timer == 0 then end quiz...call function
 
-//TO DO make function to end the quiz
-//stops the clock/timer
-//displays element with text saying game over.
-//displays element with score
-//...make variable to figure score
-//hide the elements with the question text and answers
-//exposes input to enter initials for high scores
-//expose button to submit initials for saving high scores
-//expose button to clear high scores
+submitBtn.addEventListener("click", saveInitials);
 
-//TO DO make a function to record the high scores...event listener
-//injects text into element showing high scores
-//displays that element
+function saveInitials() {
+	if (initials !== "") {
+		highScoresList =
+			JSON.parse(window.localStorage.getItem("highScoresList")) || [];
 
-//TO DO button for upper left of page...high scores button
-//takes user to high scores page
-//needs event listener and calls function to end the quiz...
+		var newHighScore = {
+			initials: initials,
+		};
+
+		highScoresList.push(newHighSchore);
+		window.localStorage.setItem(
+			"highScoresList",
+			JSON.stringify(highScoresList)
+		);
+
+		wrapupCard.classList.add("d-none");
+		highScoresCard.classList.remove("d-none");
+	}
+}
