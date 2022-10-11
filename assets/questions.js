@@ -4,89 +4,113 @@
 
 var questions = [
 	{
-		title: "What is 1?",
+		title: "Commonly used data types DO NOT include?",
 		responses: [
 			{
-				title: "1",
+				title: "strings",
+				iscorrect: false,
+			},
+			{
+				title: "alerts",
 				iscorrect: true,
 			},
 			{
-				title: "2",
+				title: "booleans",
 				iscorrect: false,
 			},
 			{
-				title: "3",
-				iscorrect: false,
-			},
-			{
-				title: "4",
+				title: "numbers",
 				iscorrect: false,
 			},
 		],
 	},
 
 	{
-		title: "What is 2?",
+		title: "The condition in an if / else statement is enclosed within _____.",
 		responses: [
 			{
-				title: "1",
+				title: "quotes",
 				iscorrect: false,
 			},
 			{
-				title: "2",
+				title: "curly brackets",
+				iscorrect: false,
+			},
+			{
+				title: "parentheses",
 				iscorrect: true,
 			},
 			{
-				title: "3",
-				iscorrect: false,
-			},
-			{
-				title: "4",
+				title: "square brackets",
 				iscorrect: false,
 			},
 		],
 	},
 
 	{
-		title: "What is 3?",
+		title: "Arrays in JavaScript can be used to store _____.",
 		responses: [
 			{
-				title: "1",
+				title: "numbers and strings",
 				iscorrect: false,
 			},
 			{
-				title: "2",
+				title: "other arrays",
 				iscorrect: false,
 			},
 			{
-				title: "3",
+				title: "booleans",
+				iscorrect: false,
+			},
+			{
+				title: "all of the above",
+				iscorrect: true,
+			},
+		],
+	},
+
+	{
+		title:
+			"string values must be enclosed within _____ when being assigned to variables?",
+		responses: [
+			{
+				title: "quotes",
 				iscorrect: true,
 			},
 			{
-				title: "4",
+				title: "curly brackets",
+				iscorrect: false,
+			},
+			{
+				title: "commas",
+				iscorrect: false,
+			},
+			{
+				title: "parentheses",
 				iscorrect: false,
 			},
 		],
 	},
 
 	{
-		title: "What is 4?",
+		title:
+			"A very useful tool used during development and debugging for printing content to the debugger is:",
 		responses: [
 			{
-				title: "1",
+				title: "for loops",
 				iscorrect: false,
 			},
 			{
-				title: "2",
+				title: "terminal / bash",
 				iscorrect: false,
 			},
 			{
-				title: "3",
-				iscorrect: false,
-			},
-			{
-				title: "4",
+				title: "console.log",
 				iscorrect: true,
+			},
+			{
+				title: "JavaScript",
+				iscorrect: false,
 			},
 		],
 	},
