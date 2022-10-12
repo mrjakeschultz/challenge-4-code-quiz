@@ -17,6 +17,7 @@ var highScoresCard = document.getElementById("highScoresCard");
 var highScoresList = document.getElementById("highScoresList");
 var clearBtn = document.getElementById("clearBtn");
 var goBackBtn = document.getElementById("gobackBtn");
+var feedback = document.getElementById("right-wrong");
 
 highScoresBtn.addEventListener("click", function () {
 	welcomeCard.classList.add("d-none");
@@ -79,20 +80,27 @@ $(buttonsArray).on("click", function (e) {
 		if (timeRemaining < 0) {
 			timeRemaining = 0;
 		}
+
+		feedback.textContent = "You suck!";
 	} else {
 		timeRemaining += 15;
 		scoreCounter++;
+		feedback.textContent = "You rule!";
 		console.log("true");
 	}
+	setTimeout(function () {
+		feedback.setAttribute("class", "d-none");
+	}, 1500);
+	feedback.removeAttribute("class", "d-none");
 
 	questionsIndex++;
 
 	if (questionsIndex === questions.length) {
 		endQuiz();
 	} else {
-		getQuestion();
+		setTimeout(getQuestion, 1500);
 		questionTitle.textContent = selectedQuestion.title;
-		injectResponses();
+		setTimeout(injectResponses, 1500);
 	}
 });
 
