@@ -14,5 +14,7 @@ The deployed app will look like these images
 ![image](./assets/Images/2022-10-11_23-04-17.png)
 
 ## GitHub url
+https://github.com/mrjakeschultz/challenge-4-code-quiz
 
 ## Deployment url
+https://mrjakeschultz.github.io/challenge-4-code-quiz
