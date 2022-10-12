@@ -88,15 +88,19 @@ $(buttonsArray).on("click", function (e) {
 		feedback.textContent = "You rule!";
 		console.log("true");
 	}
+	setTimeout(function () {
+		feedback.setAttribute("class", "d-none");
+	}, 1500);
+	feedback.removeAttribute("class", "d-none");
 
 	questionsIndex++;
 
 	if (questionsIndex === questions.length) {
 		endQuiz();
 	} else {
-		getQuestion();
+		setTimeout(getQuestion, 1500);
 		questionTitle.textContent = selectedQuestion.title;
-		injectResponses();
+		setTimeout(injectResponses, 1500);
 	}
 });
 
