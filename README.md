@@ -9,9 +9,9 @@ Deploy using GitHub pages.
 ## Mockup
 
 The deployed app will look like these images
-!(..assets\Images\2022-10-11_23-04-53.png)
-!(..assets\Images\2022-10-11_23-04-31.png)
-!(..assets\Images\2022-10-11_23-04-17.png)
+![](..assets\Images\2022-10-11_23-04-53.png)
+![](..assets\Images\2022-10-11_23-04-31.png)
+![](..assets\Images\2022-10-11_23-04-17.png)
 
 ## GitHub url
 
